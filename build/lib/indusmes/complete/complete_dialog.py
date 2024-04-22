@@ -1,5 +1,5 @@
 from PySide6 import QtWidgets
-from complete.ui_complete_dialog import Ui_complete_dialog
+from indusmes.complete.ui_complete_dialog import Ui_complete_dialog
 
 class complete_dialog(QtWidgets.QDialog):
     def __init__(self):

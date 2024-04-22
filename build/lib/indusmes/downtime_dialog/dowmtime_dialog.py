@@ -1,5 +1,5 @@
 from PySide6 import QtWidgets, QtCore, QtGui
-from downtime_dialog.ui_downtime_dialog import Ui_downtime_reasons_dialog
+from indusmes.downtime_dialog.ui_downtime_dialog import Ui_downtime_reasons_dialog
 
 
 class downtime_dialog(QtWidgets.QDialog):

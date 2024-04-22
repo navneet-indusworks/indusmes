@@ -2,8 +2,8 @@ from PySide6.QtCore import QThread, Signal
 import multiprocessing
 from PySide6 import QtWidgets
 import sys
-from backend.sensor import Sensor
-from home.home import home
+from indusmes.backend.sensor import Sensor
+from indusmes.home.home import home
 
 
 class DataReceiver(QThread):

@@ -1,5 +1,5 @@
 from PySide6 import QtWidgets
-from rejects.ui_rejects_dialog import Ui_report_rejects_dialog
+from indusmes.rejects.ui_rejects_dialog import Ui_report_rejects_dialog
 
 class rejects_dialog(QtWidgets.QDialog):
     def __init__(self):

@@ -3,17 +3,16 @@ from PySide6 import QtWidgets
 from PySide6.QtCore import Qt, QMetaMethod
 import requests
 import json
-import pkg_resources
 from datetime import datetime
-from home.ui_home import Ui_MainWindow
-from job_card.job_card import job_card
-from progress.progress_dialog import progress_dialog
-from rejects.rejects_dialog import rejects_dialog
-from complete.complete_dialog import complete_dialog
-from user_profile.profile_dialog import profile_dialog
-from settings.settings_dialog import settings_dialog
-from ongoing_job_alert.ongoing_job_alert_dialog import ongoing_job_alert_dialog
-from downtime_dialog.dowmtime_dialog import downtime_dialog
+from indusmes.home.ui_home import Ui_MainWindow
+from indusmes.job_card.job_card import job_card
+from indusmes.progress.progress_dialog import progress_dialog
+from indusmes.rejects.rejects_dialog import rejects_dialog
+from indusmes.complete.complete_dialog import complete_dialog
+from indusmes.user_profile.profile_dialog import profile_dialog
+from indusmes.settings.settings_dialog import settings_dialog
+from indusmes.ongoing_job_alert.ongoing_job_alert_dialog import ongoing_job_alert_dialog
+from indusmes.downtime_dialog.dowmtime_dialog import downtime_dialog
 
 
 class home(QtWidgets.QMainWindow):
@@ -27,8 +26,8 @@ class home(QtWidgets.QMainWindow):
         self.ui = Ui_MainWindow()
         self.ui.setupUi(self)
         self.show()
-
-        self.config_file = os.path.expanduser("~/indusmes/src/indusmes/backend/config.json")
+        self.config_file = os.path.join(os.path.dirname(os.path.dirname(os.path.realpath(__file__))), 'backend', 'config.json')
+        #self.config_file = os.path.expanduser("~/indusmes/src/indusmes/backend/config.json")
 
 
         with open(self.config_file, 'r') as f:

@@ -11,6 +11,8 @@ src/indusmes.egg-info/requires.txt
 src/indusmes.egg-info/top_level.txt
 src/indusmes/assets/__init__.py
 src/indusmes/backend/__init__.py
+src/indusmes/backend/config.json
+src/indusmes/backend/downtime_reasons.json
 src/indusmes/backend/sensor.py
 src/indusmes/complete/__init__.py
 src/indusmes/complete/complete_dialog.py
