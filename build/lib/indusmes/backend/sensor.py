@@ -9,7 +9,6 @@ import busio
 import adafruit_ads1x15.ads1115 as ADS
 from adafruit_ads1x15.analog_in import AnalogIn
 
-
 class Sensor:
     def __init__(self):
         self.downtime_reasons_file = os.path.expanduser("~/indusmes/src/indusmes/backend/downtime_reasons.json")

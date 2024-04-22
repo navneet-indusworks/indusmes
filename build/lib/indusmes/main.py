@@ -5,6 +5,7 @@ import sys
 from backend.sensor import Sensor
 from home.home import home
 
+
 class DataReceiver(QThread):
     data_received = Signal(object)
 

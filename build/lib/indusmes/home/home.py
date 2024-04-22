@@ -3,6 +3,7 @@ from PySide6 import QtWidgets
 from PySide6.QtCore import Qt, QMetaMethod
 import requests
 import json
+import pkg_resources
 from datetime import datetime
 from home.ui_home import Ui_MainWindow
 from job_card.job_card import job_card
@@ -27,7 +28,7 @@ class home(QtWidgets.QMainWindow):
         self.ui.setupUi(self)
         self.show()
 
-        self.config_file = os.path.expanduser("~/indusmes/src/indusmes/backend/config.json") 
+        self.config_file = os.path.expanduser("~/indusmes/src/indusmes/backend/config.json")
 
 
         with open(self.config_file, 'r') as f:
