@@ -1,3 +1,5 @@
+#!/usr/bin/env python3
+
 from PySide6.QtCore import QThread, Signal
 import multiprocessing
 from PySide6 import QtWidgets
