@@ -1,11 +1,9 @@
-#!/usr/bin/env python3
-
 from PySide6.QtCore import QThread, Signal
 import multiprocessing
 from PySide6 import QtWidgets
 import sys
-from indusmes.backend.sensor import Sensor
-from indusmes.home.home import home
+from backend.sensor import Sensor
+from home.home import home
 
 
 class DataReceiver(QThread):
@@ -24,7 +22,7 @@ class MainApp(QtWidgets.QMainWindow):
     def __init__(self, app, parent_conn, child_conn):
         super().__init__()
         self.home = home(app)
-        self.home.showMaximized()
+        #self.home.showMaximized()
         self.parent_conn = parent_conn
         self.child_conn = child_conn
         self.data_receiver = DataReceiver(parent_conn)

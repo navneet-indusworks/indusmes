@@ -25,7 +25,8 @@ class Sensor:
         self.ct_sensitivity = float(self.config_data['ct_sensitivity'])
         self.idle_current_threshold = float(self.config_data['idle_current_threshold'])
         self.idle_time_threshold = float(self.config_data['idle_time_threshold'])
-        self.downtime_counter = 0
+        print(f"Idle Current Threshold: {self.idle_current_threshold}")
+        self.downtime_counter = float(0.0)
         self.sensor = None
         if 'arm' in platform.machine().lower():
             self.i2c = busio.I2C(board.SCL, board.SDA)
@@ -33,7 +34,7 @@ class Sensor:
             self.sensor = AnalogIn(self.ads, ADS.P0)
 
     def update_downtime_reasons(self):
-        url = f"{self.site}/api/v2/document/Downtime Reasons"
+        url = f"{self.site}/api/v2/document/Downtime Reasons?fields=[\"name\", \"reason\"]"
         headers = {
             "Authorization": f"token {self.api_key}:{self.api_secret}"
         }
@@ -52,7 +53,7 @@ class Sensor:
         sum_squared_currents = 0
         for _ in range(num_samples):
             if self.sensor is None:
-                voltage = 0
+                voltage = 3
             else:
                 voltage = self.sensor.voltage
             instantaneous_current = voltage * self.ct_sensitivity
@@ -82,12 +83,14 @@ class Sensor:
         else:
             return None
 
-    def create_downtime_record(self, active_job_id):
-        url = f"{self.site}/api/v2/method/indusworks.api.create_downtime?name={active_job_id}"
+    def create_downtime_record(self, asset_name):
+        url = f"{self.site}/api/v2/method/indusworks.api.create_downtime?asset_name={asset_name}"
         headers = {
             "Authorization": f"token {self.api_key}:{self.api_secret}"
         }
         response = requests.post(url, headers=headers)
+        print(response.status_code)
+        print(response.text)
         if response.status_code == 200:
             data = response.text
             name = json.loads(data)['data']['name']
@@ -126,7 +129,7 @@ class Sensor:
                 downtime_record = self.get_downtime_record()
                 if downtime_record:
                     self.close_downtime_record(downtime_record)
-                    self.downtime_counter = 0
+                    self.downtime_counter = 0.0
                 else:
                     pass
             else:
@@ -137,12 +140,9 @@ class Sensor:
                     self.downtime_counter += 1
                     print(f"Downtime Counter: {self.downtime_counter}")
                     if self.downtime_counter > self.idle_time_threshold:
-                        active_job_id = self.get_active_job()
-                        if active_job_id:
-                            data = self.create_downtime_record(active_job_id)
-                            conn.send(data)
-                        else:
-                            pass
+                        print("Triggering downtime record")
+                        data = self.create_downtime_record(self.asset_id)
+                        conn.send(data)
                     else:
                         pass
             time.sleep(1)

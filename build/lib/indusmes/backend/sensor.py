@@ -42,7 +42,7 @@ class Sensor:
             data = json.loads(response.text)
             with open(self.downtime_reasons_file, 'w') as f:
                 json.dump(data, f)
-            print("Downtime reasons updated successfully")
+            print("build Downtime reasons updated successfully")
         else:
             print("Failed to update downtime reasons")
     

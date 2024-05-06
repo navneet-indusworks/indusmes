@@ -3,7 +3,7 @@
 ################################################################################
 ## Form generated from reading UI file 'home.ui'
 ##
-## Created by: Qt User Interface Compiler version 6.6.3
+## Created by: Qt User Interface Compiler version 6.7.0
 ##
 ## WARNING! All changes made in this file will be lost when recompiling UI file!
 ################################################################################
@@ -18,17 +18,16 @@ from PySide6.QtGui import (QBrush, QColor, QConicalGradient, QCursor,
 from PySide6.QtWidgets import (QApplication, QFrame, QGroupBox, QHBoxLayout,
     QLabel, QLayout, QLineEdit, QMainWindow,
     QPushButton, QScrollArea, QSizePolicy, QSpacerItem,
-    QStackedWidget, QTabWidget, QTextBrowser, QVBoxLayout,
-    QWidget)
-from indusmes import icons_rc
+    QStackedWidget, QTabWidget, QVBoxLayout, QWidget)
+import icons_rc
 
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
         if not MainWindow.objectName():
             MainWindow.setObjectName(u"MainWindow")
         MainWindow.setWindowModality(Qt.ApplicationModal)
-        MainWindow.resize(816, 744)
-        MainWindow.setMinimumSize(QSize(480, 640))
+        MainWindow.resize(480, 800)
+        MainWindow.setMinimumSize(QSize(480, 800))
         MainWindow.setMaximumSize(QSize(5000, 5000))
         palette = QPalette()
         brush = QBrush(QColor(255, 255, 255, 255))
@@ -120,7 +119,7 @@ class Ui_MainWindow(object):
         MainWindow.setTabShape(QTabWidget.Rounded)
         self.MainWidget = QWidget(MainWindow)
         self.MainWidget.setObjectName(u"MainWidget")
-        self.MainWidget.setMinimumSize(QSize(480, 640))
+        self.MainWidget.setMinimumSize(QSize(480, 800))
         self.MainWidget.setMaximumSize(QSize(5000, 5000))
         self.MainWidget.setStyleSheet(u"")
         self.verticalLayout = QVBoxLayout(self.MainWidget)
@@ -182,7 +181,7 @@ class Ui_MainWindow(object):
         sizePolicy.setVerticalStretch(0)
         sizePolicy.setHeightForWidth(self.main_section.sizePolicy().hasHeightForWidth())
         self.main_section.setSizePolicy(sizePolicy)
-        self.main_section.setMinimumSize(QSize(480, 600))
+        self.main_section.setMinimumSize(QSize(480, 800))
         self.main_section.setMaximumSize(QSize(5000, 5000))
         font1 = QFont()
         font1.setFamilies([u"Fira Sans Semi-Light"])
@@ -198,7 +197,7 @@ class Ui_MainWindow(object):
         sizePolicy1.setVerticalStretch(0)
         sizePolicy1.setHeightForWidth(self.login.sizePolicy().hasHeightForWidth())
         self.login.setSizePolicy(sizePolicy1)
-        self.login.setMinimumSize(QSize(480, 600))
+        self.login.setMinimumSize(QSize(480, 800))
         self.login.setMaximumSize(QSize(5000, 5000))
         self.login.setStyleSheet(u"")
         self.verticalLayout_3 = QVBoxLayout(self.login)
@@ -333,7 +332,7 @@ class Ui_MainWindow(object):
         self.job_area.setAlignment(Qt.AlignLeading|Qt.AlignLeft|Qt.AlignTop)
         self.job_area_contents = QWidget()
         self.job_area_contents.setObjectName(u"job_area_contents")
-        self.job_area_contents.setGeometry(QRect(0, 0, 814, 625))
+        self.job_area_contents.setGeometry(QRect(0, 0, 478, 722))
         self.job_area_contents.setStyleSheet(u"")
         self.job_area.setWidget(self.job_area_contents)
 
@@ -345,7 +344,9 @@ class Ui_MainWindow(object):
         self.job_details.setMinimumSize(QSize(480, 600))
         self.job_details.setMaximumSize(QSize(5000, 5000))
         self.verticalLayout_5 = QVBoxLayout(self.job_details)
+        self.verticalLayout_5.setSpacing(0)
         self.verticalLayout_5.setObjectName(u"verticalLayout_5")
+        self.verticalLayout_5.setContentsMargins(0, 0, 0, 20)
         self.job_details_label = QLabel(self.job_details)
         self.job_details_label.setObjectName(u"job_details_label")
         self.job_details_label.setMinimumSize(QSize(0, 30))
@@ -361,194 +362,224 @@ class Ui_MainWindow(object):
 
         self.job_details_area = QWidget(self.job_details)
         self.job_details_area.setObjectName(u"job_details_area")
+        self.job_details_area.setMinimumSize(QSize(0, 700))
+        self.job_details_area.setMaximumSize(QSize(16777215, 700))
         font8 = QFont()
         font8.setPointSize(14)
         self.job_details_area.setFont(font8)
-        self.horizontalLayout_2 = QHBoxLayout(self.job_details_area)
+        self.horizontalLayout_3 = QHBoxLayout(self.job_details_area)
+        self.horizontalLayout_3.setObjectName(u"horizontalLayout_3")
+        self.horizontalLayout_3.setContentsMargins(-1, -1, -1, 9)
+        self.horizontalLayout_2 = QHBoxLayout()
         self.horizontalLayout_2.setObjectName(u"horizontalLayout_2")
-        self.job_info_layout = QVBoxLayout()
-        self.job_info_layout.setObjectName(u"job_info_layout")
-        self.job_info_layout.setContentsMargins(0, -1, -1, -1)
+        self.verticalLayout_6 = QVBoxLayout()
+        self.verticalLayout_6.setObjectName(u"verticalLayout_6")
         self.job_id_label = QLabel(self.job_details_area)
         self.job_id_label.setObjectName(u"job_id_label")
+        self.job_id_label.setMinimumSize(QSize(320, 30))
         font9 = QFont()
         font9.setFamilies([u"Roboto"])
         font9.setPointSize(11)
         self.job_id_label.setFont(font9)
 
-        self.job_info_layout.addWidget(self.job_id_label)
+        self.verticalLayout_6.addWidget(self.job_id_label)
 
         self.job_id_text = QLabel(self.job_details_area)
         self.job_id_text.setObjectName(u"job_id_text")
-        self.job_id_text.setMinimumSize(QSize(0, 16))
+        self.job_id_text.setMinimumSize(QSize(320, 30))
         self.job_id_text.setFont(font8)
         self.job_id_text.setStyleSheet(u"background-color: rgb(119, 118, 123);")
         self.job_id_text.setMargin(2)
 
-        self.job_info_layout.addWidget(self.job_id_text)
+        self.verticalLayout_6.addWidget(self.job_id_text)
 
-        self.material_label = QLabel(self.job_details_area)
-        self.material_label.setObjectName(u"material_label")
-        self.material_label.setFont(font9)
+        self.operation_label = QLabel(self.job_details_area)
+        self.operation_label.setObjectName(u"operation_label")
+        self.operation_label.setMinimumSize(QSize(320, 0))
+        self.operation_label.setFont(font9)
 
-        self.job_info_layout.addWidget(self.material_label)
+        self.verticalLayout_6.addWidget(self.operation_label)
 
-        self.material_text = QLabel(self.job_details_area)
-        self.material_text.setObjectName(u"material_text")
-        self.material_text.setMinimumSize(QSize(0, 16))
-        self.material_text.setFont(font8)
-        self.material_text.setStyleSheet(u"background-color: rgb(119, 118, 123);")
-        self.material_text.setMargin(2)
+        self.operation_text = QLabel(self.job_details_area)
+        self.operation_text.setObjectName(u"operation_text")
+        self.operation_text.setMinimumSize(QSize(320, 30))
+        self.operation_text.setFont(font8)
+        self.operation_text.setStyleSheet(u"background-color: rgb(119, 118, 123);")
+        self.operation_text.setMargin(2)
 
-        self.job_info_layout.addWidget(self.material_text)
-
-        self.quantity_label = QLabel(self.job_details_area)
-        self.quantity_label.setObjectName(u"quantity_label")
-        self.quantity_label.setFont(font9)
-
-        self.job_info_layout.addWidget(self.quantity_label)
-
-        self.quantity_text = QLabel(self.job_details_area)
-        self.quantity_text.setObjectName(u"quantity_text")
-        self.quantity_text.setMinimumSize(QSize(0, 16))
-        self.quantity_text.setFont(font8)
-        self.quantity_text.setStyleSheet(u"background-color: rgb(119, 118, 123);")
-        self.quantity_text.setMargin(2)
-
-        self.job_info_layout.addWidget(self.quantity_text)
-
-        self.good_quantity_label = QLabel(self.job_details_area)
-        self.good_quantity_label.setObjectName(u"good_quantity_label")
-        self.good_quantity_label.setFont(font9)
-
-        self.job_info_layout.addWidget(self.good_quantity_label)
-
-        self.good_quantity_text = QLabel(self.job_details_area)
-        self.good_quantity_text.setObjectName(u"good_quantity_text")
-        self.good_quantity_text.setMinimumSize(QSize(0, 16))
-        self.good_quantity_text.setFont(font8)
-        self.good_quantity_text.setStyleSheet(u"background-color: rgb(119, 118, 123);")
-        self.good_quantity_text.setMargin(2)
-
-        self.job_info_layout.addWidget(self.good_quantity_text)
-
-        self.reject_quantity_label = QLabel(self.job_details_area)
-        self.reject_quantity_label.setObjectName(u"reject_quantity_label")
-        self.reject_quantity_label.setFont(font9)
-
-        self.job_info_layout.addWidget(self.reject_quantity_label)
-
-        self.reject_quantity_text = QLabel(self.job_details_area)
-        self.reject_quantity_text.setObjectName(u"reject_quantity_text")
-        self.reject_quantity_text.setMinimumSize(QSize(0, 16))
-        self.reject_quantity_text.setFont(font8)
-        self.reject_quantity_text.setStyleSheet(u"background-color: rgb(119, 118, 123);")
-        self.reject_quantity_text.setMargin(2)
-
-        self.job_info_layout.addWidget(self.reject_quantity_text)
+        self.verticalLayout_6.addWidget(self.operation_text)
 
         self.date_label = QLabel(self.job_details_area)
         self.date_label.setObjectName(u"date_label")
+        self.date_label.setMinimumSize(QSize(320, 30))
         self.date_label.setFont(font9)
 
-        self.job_info_layout.addWidget(self.date_label)
+        self.verticalLayout_6.addWidget(self.date_label)
 
         self.date_text = QLabel(self.job_details_area)
         self.date_text.setObjectName(u"date_text")
-        self.date_text.setMinimumSize(QSize(0, 16))
+        self.date_text.setMinimumSize(QSize(320, 30))
         self.date_text.setFont(font8)
         self.date_text.setStyleSheet(u"background-color: rgb(119, 118, 123);")
         self.date_text.setMargin(2)
 
-        self.job_info_layout.addWidget(self.date_text)
+        self.verticalLayout_6.addWidget(self.date_text)
+
+        self.material_label = QLabel(self.job_details_area)
+        self.material_label.setObjectName(u"material_label")
+        self.material_label.setMinimumSize(QSize(320, 30))
+        self.material_label.setFont(font9)
+
+        self.verticalLayout_6.addWidget(self.material_label)
+
+        self.material_text = QLabel(self.job_details_area)
+        self.material_text.setObjectName(u"material_text")
+        self.material_text.setMinimumSize(QSize(320, 30))
+        self.material_text.setFont(font8)
+        self.material_text.setStyleSheet(u"background-color: rgb(119, 118, 123);")
+        self.material_text.setMargin(2)
+
+        self.verticalLayout_6.addWidget(self.material_text)
+
+        self.quantity_label = QLabel(self.job_details_area)
+        self.quantity_label.setObjectName(u"quantity_label")
+        self.quantity_label.setMinimumSize(QSize(320, 30))
+        self.quantity_label.setFont(font9)
+
+        self.verticalLayout_6.addWidget(self.quantity_label)
+
+        self.quantity_text = QLabel(self.job_details_area)
+        self.quantity_text.setObjectName(u"quantity_text")
+        self.quantity_text.setMinimumSize(QSize(320, 30))
+        self.quantity_text.setFont(font8)
+        self.quantity_text.setStyleSheet(u"background-color: rgb(119, 118, 123);")
+        self.quantity_text.setMargin(2)
+
+        self.verticalLayout_6.addWidget(self.quantity_text)
+
+        self.good_quantity_label = QLabel(self.job_details_area)
+        self.good_quantity_label.setObjectName(u"good_quantity_label")
+        self.good_quantity_label.setMinimumSize(QSize(320, 30))
+        self.good_quantity_label.setFont(font9)
+
+        self.verticalLayout_6.addWidget(self.good_quantity_label)
+
+        self.good_quantity_text = QLabel(self.job_details_area)
+        self.good_quantity_text.setObjectName(u"good_quantity_text")
+        self.good_quantity_text.setMinimumSize(QSize(320, 30))
+        self.good_quantity_text.setFont(font8)
+        self.good_quantity_text.setStyleSheet(u"background-color: rgb(119, 118, 123);")
+        self.good_quantity_text.setMargin(2)
+
+        self.verticalLayout_6.addWidget(self.good_quantity_text)
+
+        self.reject_quantity_label = QLabel(self.job_details_area)
+        self.reject_quantity_label.setObjectName(u"reject_quantity_label")
+        self.reject_quantity_label.setMinimumSize(QSize(320, 30))
+        self.reject_quantity_label.setFont(font9)
+
+        self.verticalLayout_6.addWidget(self.reject_quantity_label)
+
+        self.reject_quantity_text = QLabel(self.job_details_area)
+        self.reject_quantity_text.setObjectName(u"reject_quantity_text")
+        self.reject_quantity_text.setMinimumSize(QSize(320, 30))
+        self.reject_quantity_text.setFont(font8)
+        self.reject_quantity_text.setStyleSheet(u"background-color: rgb(119, 118, 123);")
+        self.reject_quantity_text.setMargin(2)
+
+        self.verticalLayout_6.addWidget(self.reject_quantity_text)
 
         self.status_label = QLabel(self.job_details_area)
         self.status_label.setObjectName(u"status_label")
+        self.status_label.setMinimumSize(QSize(320, 30))
         self.status_label.setFont(font9)
 
-        self.job_info_layout.addWidget(self.status_label)
+        self.verticalLayout_6.addWidget(self.status_label)
 
         self.status_text = QLabel(self.job_details_area)
         self.status_text.setObjectName(u"status_text")
-        self.status_text.setMinimumSize(QSize(0, 16))
+        self.status_text.setMinimumSize(QSize(320, 30))
         font10 = QFont()
         font10.setPointSize(12)
         self.status_text.setFont(font10)
         self.status_text.setStyleSheet(u"background-color: rgb(119, 118, 123);")
-        self.status_text.setMargin(2)
+        self.status_text.setMargin(0)
 
-        self.job_info_layout.addWidget(self.status_text)
+        self.verticalLayout_6.addWidget(self.status_text)
 
-        self.instructions_label = QLabel(self.job_details_area)
-        self.instructions_label.setObjectName(u"instructions_label")
-        self.instructions_label.setFont(font9)
 
-        self.job_info_layout.addWidget(self.instructions_label)
+        self.horizontalLayout_2.addLayout(self.verticalLayout_6)
 
-        self.instruction_text = QTextBrowser(self.job_details_area)
-        self.instruction_text.setObjectName(u"instruction_text")
+        self.button_section = QVBoxLayout()
+        self.button_section.setSpacing(20)
+        self.button_section.setObjectName(u"button_section")
+        self.stop_job_btn = QPushButton(self.job_details_area)
+        self.stop_job_btn.setObjectName(u"stop_job_btn")
+        self.stop_job_btn.setMinimumSize(QSize(130, 40))
+        self.stop_job_btn.setMaximumSize(QSize(130, 40))
         font11 = QFont()
         font11.setFamilies([u"Roboto"])
         font11.setPointSize(12)
-        self.instruction_text.setFont(font11)
-        self.instruction_text.setStyleSheet(u"background-color: rgb(119, 118, 123);")
+        self.stop_job_btn.setFont(font11)
+        self.stop_job_btn.setStyleSheet(u"background-color: rgb(26, 95, 120);")
 
-        self.job_info_layout.addWidget(self.instruction_text)
+        self.button_section.addWidget(self.stop_job_btn)
 
-        self.job_info_layout.setStretch(15, 1)
-
-        self.horizontalLayout_2.addLayout(self.job_info_layout)
-
-        self.job_actions_layout = QVBoxLayout()
-        self.job_actions_layout.setSpacing(24)
-        self.job_actions_layout.setObjectName(u"job_actions_layout")
         self.start_job_btn = QPushButton(self.job_details_area)
         self.start_job_btn.setObjectName(u"start_job_btn")
-        self.start_job_btn.setMinimumSize(QSize(0, 40))
+        self.start_job_btn.setMinimumSize(QSize(130, 40))
+        self.start_job_btn.setMaximumSize(QSize(130, 40))
         self.start_job_btn.setFont(font11)
         self.start_job_btn.setStyleSheet(u"background-color: rgb(26, 95, 120);")
 
-        self.job_actions_layout.addWidget(self.start_job_btn)
+        self.button_section.addWidget(self.start_job_btn)
 
         self.progress_btn = QPushButton(self.job_details_area)
         self.progress_btn.setObjectName(u"progress_btn")
-        self.progress_btn.setMinimumSize(QSize(0, 40))
+        self.progress_btn.setMinimumSize(QSize(130, 40))
+        self.progress_btn.setMaximumSize(QSize(130, 40))
         self.progress_btn.setFont(font11)
         self.progress_btn.setStyleSheet(u"background-color: rgb(26, 95, 120);")
 
-        self.job_actions_layout.addWidget(self.progress_btn)
+        self.button_section.addWidget(self.progress_btn)
 
         self.rejects_btn = QPushButton(self.job_details_area)
         self.rejects_btn.setObjectName(u"rejects_btn")
-        self.rejects_btn.setMinimumSize(QSize(0, 40))
+        self.rejects_btn.setMinimumSize(QSize(130, 40))
+        self.rejects_btn.setMaximumSize(QSize(130, 40))
         self.rejects_btn.setFont(font11)
         self.rejects_btn.setStyleSheet(u"background-color: rgb(26, 95, 120);")
 
-        self.job_actions_layout.addWidget(self.rejects_btn)
+        self.button_section.addWidget(self.rejects_btn)
 
         self.complete_job_btn = QPushButton(self.job_details_area)
         self.complete_job_btn.setObjectName(u"complete_job_btn")
-        self.complete_job_btn.setMinimumSize(QSize(0, 40))
+        self.complete_job_btn.setMinimumSize(QSize(130, 40))
+        self.complete_job_btn.setMaximumSize(QSize(130, 40))
         self.complete_job_btn.setFont(font11)
         self.complete_job_btn.setStyleSheet(u"background-color: rgb(26, 95, 120);")
         self.complete_job_btn.setFlat(False)
 
-        self.job_actions_layout.addWidget(self.complete_job_btn)
+        self.button_section.addWidget(self.complete_job_btn)
 
         self.job_list_btn = QPushButton(self.job_details_area)
         self.job_list_btn.setObjectName(u"job_list_btn")
-        self.job_list_btn.setMinimumSize(QSize(0, 40))
+        self.job_list_btn.setMinimumSize(QSize(130, 40))
+        self.job_list_btn.setMaximumSize(QSize(130, 40))
         self.job_list_btn.setFont(font11)
         self.job_list_btn.setStyleSheet(u"background-color: rgb(26, 95, 120);")
 
-        self.job_actions_layout.addWidget(self.job_list_btn)
+        self.button_section.addWidget(self.job_list_btn)
 
         self.verticalSpacer_2 = QSpacerItem(20, 40, QSizePolicy.Policy.Minimum, QSizePolicy.Policy.Expanding)
 
-        self.job_actions_layout.addItem(self.verticalSpacer_2)
+        self.button_section.addItem(self.verticalSpacer_2)
 
 
-        self.horizontalLayout_2.addLayout(self.job_actions_layout)
+        self.horizontalLayout_2.addLayout(self.button_section)
+
+
+        self.horizontalLayout_3.addLayout(self.horizontalLayout_2)
 
 
         self.verticalLayout_5.addWidget(self.job_details_area)
@@ -561,7 +592,7 @@ class Ui_MainWindow(object):
 
         self.retranslateUi(MainWindow)
 
-        self.main_section.setCurrentIndex(1)
+        self.main_section.setCurrentIndex(2)
         self.complete_job_btn.setDefault(False)
 
 
@@ -587,27 +618,21 @@ class Ui_MainWindow(object):
         self.job_details_label.setText(QCoreApplication.translate("MainWindow", u"Job Details", None))
         self.job_id_label.setText(QCoreApplication.translate("MainWindow", u"Job ID:", None))
         self.job_id_text.setText("")
+        self.operation_label.setText(QCoreApplication.translate("MainWindow", u"Operation:", None))
+        self.operation_text.setText("")
+        self.date_label.setText(QCoreApplication.translate("MainWindow", u"Target Start Date:", None))
+        self.date_text.setText("")
         self.material_label.setText(QCoreApplication.translate("MainWindow", u"Material:", None))
         self.material_text.setText("")
         self.quantity_label.setText(QCoreApplication.translate("MainWindow", u"Target Quantity:", None))
         self.quantity_text.setText("")
         self.good_quantity_label.setText(QCoreApplication.translate("MainWindow", u"Good Quantity:", None))
         self.good_quantity_text.setText("")
-        self.reject_quantity_label.setText(QCoreApplication.translate("MainWindow", u"Reject Quantity:", None))
+        self.reject_quantity_label.setText(QCoreApplication.translate("MainWindow", u"Rejected Quantity:", None))
         self.reject_quantity_text.setText("")
-        self.date_label.setText(QCoreApplication.translate("MainWindow", u"Target Start Date:", None))
-        self.date_text.setText("")
-        self.status_label.setText(QCoreApplication.translate("MainWindow", u"Current Status:", None))
+        self.status_label.setText(QCoreApplication.translate("MainWindow", u"Job Status:", None))
         self.status_text.setText("")
-        self.instructions_label.setText(QCoreApplication.translate("MainWindow", u"Instructions:", None))
-        self.instruction_text.setHtml(QCoreApplication.translate("MainWindow", u"<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
-"<html><head><meta name=\"qrichtext\" content=\"1\" /><meta charset=\"utf-8\" /><style type=\"text/css\">\n"
-"p, li { white-space: pre-wrap; }\n"
-"hr { height: 1px; border-width: 0; }\n"
-"li.unchecked::marker { content: \"\\2610\"; }\n"
-"li.checked::marker { content: \"\\2612\"; }\n"
-"</style></head><body style=\" font-family:'Roboto'; font-size:12pt; font-weight:400; font-style:normal;\">\n"
-"<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><br /></p></body></html>", None))
+        self.stop_job_btn.setText(QCoreApplication.translate("MainWindow", u"Stop Job", None))
         self.start_job_btn.setText(QCoreApplication.translate("MainWindow", u"Start Job", None))
         self.progress_btn.setText(QCoreApplication.translate("MainWindow", u"Report Progress", None))
         self.rejects_btn.setText(QCoreApplication.translate("MainWindow", u"Report Rejects", None))

@@ -1,5 +1,5 @@
 from PySide6 import QtWidgets
-from indusmes.user_profile.ui_profile_dialog import Ui_profile_dialog
+from user_profile.ui_profile_dialog import Ui_profile_dialog
 
 class profile_dialog(QtWidgets.QDialog):
     def __init__(self):

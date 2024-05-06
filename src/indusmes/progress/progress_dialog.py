@@ -1,5 +1,5 @@
 from PySide6 import QtWidgets
-from indusmes.progress.ui_progress_dialog import Ui_report_progress_dialog
+from progress.ui_progress_dialog import Ui_report_progress_dialog
 
 class progress_dialog(QtWidgets.QDialog):
     def __init__(self):

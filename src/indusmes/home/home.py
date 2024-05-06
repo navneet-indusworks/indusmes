@@ -4,15 +4,15 @@ from PySide6.QtCore import Qt, QMetaMethod
 import requests
 import json
 from datetime import datetime
-from indusmes.home.ui_home import Ui_MainWindow
-from indusmes.job_card.job_card import job_card
-from indusmes.progress.progress_dialog import progress_dialog
-from indusmes.rejects.rejects_dialog import rejects_dialog
-from indusmes.complete.complete_dialog import complete_dialog
-from indusmes.user_profile.profile_dialog import profile_dialog
-from indusmes.settings.settings_dialog import settings_dialog
-from indusmes.ongoing_job_alert.ongoing_job_alert_dialog import ongoing_job_alert_dialog
-from indusmes.downtime_dialog.dowmtime_dialog import downtime_dialog
+from home.ui_home import Ui_MainWindow
+from job_card.job_card import job_card
+from progress.progress_dialog import progress_dialog
+from rejects.rejects_dialog import rejects_dialog
+from complete.complete_dialog import complete_dialog
+from user_profile.profile_dialog import profile_dialog
+from settings.settings_dialog import settings_dialog
+from ongoing_job_alert.ongoing_job_alert_dialog import ongoing_job_alert_dialog
+from downtime_dialog.dowmtime_dialog import downtime_dialog
 
 
 class home(QtWidgets.QMainWindow):
@@ -84,7 +84,6 @@ class home(QtWidgets.QMainWindow):
         self.date_text = self.ui.date_text
         self.quantity_text = self.ui.quantity_text
         self.status_text = self.ui.status_text
-        self.instructions_text = self.ui.instruction_text
         self.good_quantity_text = self.ui.good_quantity_text
         self.reject_quantity_text = self.ui.reject_quantity_text
         self.job_list_btn = self.ui.job_list_btn
@@ -409,16 +408,28 @@ class home(QtWidgets.QMainWindow):
         downtime_name = json.loads(DATA)['data']['name']
         dialog.downtime_start_time_text.setText(formatted_time)
         # Load downtime reasons from a file
-        reasons_file = os.path.expanduser("~/src/backend/downtime_reasons.json")
+        #reasons_file = os.path.expanduser("~/src/backend/downtime_reasons.json")
+        reasons_file = os.path.join(os.path.dirname(os.path.dirname(os.path.realpath(__file__))), 'backend', 'downtime_reasons.json')
         with open(reasons_file, 'r') as f:
             reasons = json.load(f)
         for reason in reasons['data']:
-            dialog.downtime_reasons_combo.addItem(reason['name'])
-        dialog.submit_button.clicked.connect(lambda: self.update_downtime_reason(dialog, downtime_name))
+            dialog.downtime_reasons_combo.addItem(reason['reason'])
+        dialog.submit_button.clicked.connect(lambda: self.update_downtime_reason(reasons_file, dialog, downtime_name))
         dialog.exec()
     
-    def update_downtime_reason(self, dialog, downtime_name):
-        url = f"{self.site}/api/v2/method/indusworks.api.update_downtime?downtime_name={downtime_name}&reason={dialog.downtime_reasons_combo.currentText()}"
+    def update_downtime_reason(self, reasons_file, dialog, downtime_name):
+        
+        reason = dialog.downtime_reasons_combo.currentText()
+        with open(reasons_file, 'r') as f:
+            reasons = json.load(f)
+        for r in reasons['data']:
+            if r['reason'] == reason:
+                reason_name = r['name']
+                break
+        else:
+            reason_name = ""
+        
+        url = f"{self.site}/api/v2/method/indusworks.api.update_downtime?downtime_name={downtime_name}&reason_name={reason_name}"
         headers = {
             "Authorization": f"token {self.api_key}:{self.api_secret}"
         }
