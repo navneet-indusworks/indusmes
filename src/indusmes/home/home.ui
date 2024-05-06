@@ -1037,7 +1037,7 @@
              <x>0</x>
              <y>0</y>
              <width>478</width>
-             <height>722</height>
+             <height>522</height>
             </rect>
            </property>
            <property name="styleSheet">
@@ -1485,34 +1485,6 @@
                 <number>20</number>
                </property>
                <item>
-                <widget class="QPushButton" name="stop_job_btn">
-                 <property name="minimumSize">
-                  <size>
-                   <width>130</width>
-                   <height>40</height>
-                  </size>
-                 </property>
-                 <property name="maximumSize">
-                  <size>
-                   <width>130</width>
-                   <height>40</height>
-                  </size>
-                 </property>
-                 <property name="font">
-                  <font>
-                   <family>Roboto</family>
-                   <pointsize>12</pointsize>
-                  </font>
-                 </property>
-                 <property name="styleSheet">
-                  <string notr="true">background-color: rgb(26, 95, 120);</string>
-                 </property>
-                 <property name="text">
-                  <string>Stop Job</string>
-                 </property>
-                </widget>
-               </item>
-               <item>
                 <widget class="QPushButton" name="start_job_btn">
                  <property name="minimumSize">
                   <size>
@@ -1537,6 +1509,34 @@
                  </property>
                  <property name="text">
                   <string>Start Job</string>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QPushButton" name="stop_job_btn">
+                 <property name="minimumSize">
+                  <size>
+                   <width>130</width>
+                   <height>40</height>
+                  </size>
+                 </property>
+                 <property name="maximumSize">
+                  <size>
+                   <width>130</width>
+                   <height>40</height>
+                  </size>
+                 </property>
+                 <property name="font">
+                  <font>
+                   <family>Roboto</family>
+                   <pointsize>12</pointsize>
+                  </font>
+                 </property>
+                 <property name="styleSheet">
+                  <string notr="true">background-color: rgb(26, 95, 120);</string>
+                 </property>
+                 <property name="text">
+                  <string>Stop Job</string>
                  </property>
                 </widget>
                </item>
