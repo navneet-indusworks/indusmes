@@ -53,7 +53,7 @@ class Sensor:
         sum_squared_currents = 0
         for _ in range(num_samples):
             if self.sensor is None:
-                voltage = 3
+                voltage = 0
             else:
                 voltage = self.sensor.voltage
             instantaneous_current = voltage * self.ct_sensitivity
