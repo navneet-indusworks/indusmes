@@ -1,5 +1,5 @@
 from PySide6 import QtWidgets
-from settings.ui_settings_dialog import Ui_settings_dialog
+from indusmes.settings.ui_settings_dialog import Ui_settings_dialog
 
 class settings_dialog(QtWidgets.QDialog):
     def __init__(self):

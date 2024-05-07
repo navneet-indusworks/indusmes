@@ -5,15 +5,15 @@ from PySide6.QtCore import Qt, QMetaMethod
 import requests
 import json
 from datetime import datetime
-from home.ui_home import Ui_MainWindow
-from job_card.job_card import job_card
-from progress.progress_dialog import progress_dialog
-from rejects.rejects_dialog import rejects_dialog
-from complete.complete_dialog import complete_dialog
-from user_profile.profile_dialog import profile_dialog
-from settings.settings_dialog import settings_dialog
-from ongoing_job_alert.ongoing_job_alert_dialog import ongoing_job_alert_dialog
-from downtime_dialog.dowmtime_dialog import downtime_dialog
+from indusmes.home.ui_home import Ui_MainWindow
+from indusmes.job_card.job_card import job_card
+from indusmes.progress.progress_dialog import progress_dialog
+from indusmes.rejects.rejects_dialog import rejects_dialog
+from indusmes.complete.complete_dialog import complete_dialog
+from indusmes.user_profile.profile_dialog import profile_dialog
+from indusmes.settings.settings_dialog import settings_dialog
+from indusmes.ongoing_job_alert.ongoing_job_alert_dialog import ongoing_job_alert_dialog
+from indusmes.downtime_dialog.dowmtime_dialog import downtime_dialog
 
 
 class home(QtWidgets.QMainWindow):

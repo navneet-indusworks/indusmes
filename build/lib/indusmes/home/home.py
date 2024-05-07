@@ -1,4 +1,5 @@
 import os
+from tracemalloc import stop
 from PySide6 import QtWidgets
 from PySide6.QtCore import Qt, QMetaMethod
 import requests
@@ -78,17 +79,18 @@ class home(QtWidgets.QMainWindow):
         self.job_list_area.setLayout(QtWidgets.QVBoxLayout())
         self.job_list_area.layout().setAlignment(Qt.AlignmentFlag.AlignTop)
 
-        # Code for job functionality
+        # Code for job card functionality
         self.job_id_text = self.ui.job_id_text
+        self.operation_text = self.ui.operation_text
         self.material_text = self.ui.material_text
         self.date_text = self.ui.date_text
         self.quantity_text = self.ui.quantity_text
         self.status_text = self.ui.status_text
-        self.instructions_text = self.ui.instruction_text
         self.good_quantity_text = self.ui.good_quantity_text
         self.reject_quantity_text = self.ui.reject_quantity_text
         self.job_list_btn = self.ui.job_list_btn
         self.start_job_btn = self.ui.start_job_btn
+        self.stop_job_btn = self.ui.stop_job_btn
         self.complete_job_btn = self.ui.complete_job_btn
         self.progress_btn = self.ui.progress_btn
         self.rejects_btn = self.ui.rejects_btn
@@ -201,7 +203,7 @@ class home(QtWidgets.QMainWindow):
             card.job_id.setText(str(job['name']))
             card.material.setText(str(job['material_name']))
             card.date.setText(str(job['planned_start_date_time']))
-            card.quantity.setText(str(job['target_quantity']))
+            card.quantity.setText(str(job['planned_quantity']))
             card.status.setText(str(job['job_status']))
             card.view.clicked.connect(self.card_lambda(card.job_id))
             self.job_list_area.layout().addWidget(card)
@@ -215,7 +217,7 @@ class home(QtWidgets.QMainWindow):
             del widget
     
     def fetch_latest_job_list(self):
-            url = f"{self.site}/api/v2/document/Job Card?fields=[\"name\", \"material_name\", \"planned_start_date_time\", \"target_quantity\", \"job_status\"]&filters=[[\"asset\", \"=\", \"{self.asset_id}\"],[\"job_status\", \"!=\", \"Cancelled\"],[\"job_status\", \"!=\", \"Completed\"]]&order_by=planned_start_date_time%20asc"
+            url = f"{self.site}/api/v2/document/Job Card?fields=[\"*\"]&filters=[[\"asset\", \"=\", \"{self.asset_id}\"],[\"job_status\", \"!=\", \"Cancelled\"],[\"job_status\", \"!=\", \"Completed\"]]&order_by=planned_start_date_time%20asc"
             response = self.session.get(url)
             self.joblist = response.text
     
@@ -226,19 +228,18 @@ class home(QtWidgets.QMainWindow):
         self.main_section.setCurrentWidget(self.job_card_page)
         self.clear_job_details()
         data = self.fetch_latest_job_details(job_id)
+        print(data)
+        self.operation_text.setText(str(data['operation_name']))
         self.job_id_text.setText(str(data['name']))
         self.material_text.setText(str(data['material_name']))
         self.date_text.setText(str(data['planned_start_date_time']))
-        self.quantity_text.setText(str(data['target_quantity']))
+        self.quantity_text.setText(str(data['planned_quantity']))
         self.status_text.setText(str(data['job_status']))
-        if 'special_instructions' in data:
-            self.instructions_text.setText(str(data['special_instructions']))
-        else:
-            self.instructions_text.setText(' ')
-        self.good_quantity_text.setText(str(data['actual_total_good_quantity']))
-        self.reject_quantity_text.setText(str(data['actual_total_reject_quantity']))
+        self.good_quantity_text.setText(str(data['actual_good_output']))
+        self.reject_quantity_text.setText(str(data['actual_rejected_output']))
         # set buttons
         self.start_job_btn.clicked.connect(lambda: self.start_job_btn_fn(job_id))
+        self.stop_job_btn.clicked.connect(lambda: self.stop_job_btn_fn(job_id))
         self.complete_job_btn.clicked.connect(lambda: self.complete_job_btn_fn(job_id))
         self.progress_btn.clicked.connect(lambda: self.progress_job_btn_fn(job_id))
         self.rejects_btn.clicked.connect(lambda: self.rejects_job_btn_fn(job_id))
@@ -246,27 +247,36 @@ class home(QtWidgets.QMainWindow):
         #if else logic for enabling & disabling buttons
         if self.status_text.text() == "Not Started":
             self.start_job_btn.setEnabled(True)
+            self.stop_job_btn.setEnabled(False)
             self.complete_job_btn.setEnabled(False)
             self.progress_btn.setEnabled(False)
             self.rejects_btn.setEnabled(False)
         elif self.status_text.text() == "In Progress":
             self.start_job_btn.setEnabled(False)
+            self.stop_job_btn.setEnabled(True)
             self.complete_job_btn.setEnabled(True)
             self.progress_btn.setEnabled(True)
             self.rejects_btn.setEnabled(True)
+        elif self.status_text.text() == "Stopped":
+            self.start_job_btn.setEnabled(True)
+            self.stop_job_btn.setEnabled(False)
+            self.complete_job_btn.setEnabled(True)
+            self.progress_btn.setEnabled(False)
+            self.rejects_btn.setEnabled(False)
         elif self.status_text.text() == "Completed":
             self.start_job_btn.setEnabled(False)
+            self.stop_job_btn.setEnabled(False)
             self.complete_job_btn.setEnabled(False)
             self.progress_btn.setEnabled(False)
             self.rejects_btn.setEnabled(False)
 
     def clear_job_details(self):
         self.job_id_text.clear()
+        self.operation_text.clear()
         self.material_text.clear()
         self.date_text.clear()
         self.quantity_text.clear()
         self.status_text.clear()
-        self.instructions_text.clear()
         self.good_quantity_text.clear()
         self.reject_quantity_text.clear()
         self.disconnect_btns()
@@ -286,7 +296,7 @@ class home(QtWidgets.QMainWindow):
             dialog.job_id_text.setText(ongoing_job)
             dialog.exec()
         else:
-            url = f"{self.site}/api/v2/method/indusworks.api.start_job?name={job_id}"
+            url = f"{self.site}/api/v2/method/indusworks.api.start_job?name={job_id}&user={self.username.text()}"
             response = self.session.post(url)
             print(response.text)
             if response.status_code == 200:
@@ -306,7 +316,21 @@ class home(QtWidgets.QMainWindow):
             if job['job_status'] == "In Progress":
                 return job['name']
         return None
-        
+
+    def stop_job_btn_fn(self, job_id):
+        url = f"{self.site}/api/v2/method/indusworks.api.stop_job?name={job_id}"
+        response = self.session.post(url)
+        if response.status_code == 200:
+            with open(self.config_file, 'r+') as f:
+                config_data = json.load(f)
+                config_data['active_job_id'] = ""
+                f.seek(0)
+                json.dump(config_data, f)
+                f.truncate()
+            self.view_job_details(job_id)
+        else:
+            print("Server Busy Please Try Again Later")
+
     def progress_job_btn_fn(self, job_id):
         dialog = progress_dialog()
         dialog.current_good_qty_text.setText(str(self.good_quantity_text.text()))
@@ -347,6 +371,10 @@ class home(QtWidgets.QMainWindow):
             pass
         if self.rejects_btn.isSignalConnected(QMetaMethod.fromSignal(self.rejects_btn.clicked)):
             self.rejects_btn.clicked.disconnect()
+        else:
+            pass
+        if self.stop_job_btn.isSignalConnected(QMetaMethod.fromSignal(self.stop_job_btn.clicked)):
+            self.stop_job_btn.clicked.disconnect()
         else:
             pass
     
@@ -409,16 +437,28 @@ class home(QtWidgets.QMainWindow):
         downtime_name = json.loads(DATA)['data']['name']
         dialog.downtime_start_time_text.setText(formatted_time)
         # Load downtime reasons from a file
-        reasons_file = os.path.expanduser("~/src/backend/downtime_reasons.json")
+        #reasons_file = os.path.expanduser("~/src/backend/downtime_reasons.json")
+        reasons_file = os.path.join(os.path.dirname(os.path.dirname(os.path.realpath(__file__))), 'backend', 'downtime_reasons.json')
         with open(reasons_file, 'r') as f:
             reasons = json.load(f)
         for reason in reasons['data']:
-            dialog.downtime_reasons_combo.addItem(reason['name'])
-        dialog.submit_button.clicked.connect(lambda: self.update_downtime_reason(dialog, downtime_name))
+            dialog.downtime_reasons_combo.addItem(reason['reason'])
+        dialog.submit_button.clicked.connect(lambda: self.update_downtime_reason(reasons_file, dialog, downtime_name))
         dialog.exec()
     
-    def update_downtime_reason(self, dialog, downtime_name):
-        url = f"{self.site}/api/v2/method/indusworks.api.update_downtime?downtime_name={downtime_name}&reason={dialog.downtime_reasons_combo.currentText()}"
+    def update_downtime_reason(self, reasons_file, dialog, downtime_name):
+        
+        reason = dialog.downtime_reasons_combo.currentText()
+        with open(reasons_file, 'r') as f:
+            reasons = json.load(f)
+        for r in reasons['data']:
+            if r['reason'] == reason:
+                reason_name = r['name']
+                break
+        else:
+            reason_name = ""
+        
+        url = f"{self.site}/api/v2/method/indusworks.api.update_downtime?downtime_name={downtime_name}&reason_name={reason_name}"
         headers = {
             "Authorization": f"token {self.api_key}:{self.api_secret}"
         }

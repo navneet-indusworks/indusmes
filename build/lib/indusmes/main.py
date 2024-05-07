@@ -8,6 +8,7 @@ from indusmes.backend.sensor import Sensor
 from indusmes.home.home import home
 
 
+
 class DataReceiver(QThread):
     data_received = Signal(object)
 

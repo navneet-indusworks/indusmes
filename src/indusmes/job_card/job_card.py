@@ -1,5 +1,5 @@
 from PySide6 import QtWidgets
-from job_card.ui_job_card import Ui_job_card
+from indusmes.job_card.ui_job_card import Ui_job_card
 
 class job_card(QtWidgets.QWidget):
     def __init__(self):
