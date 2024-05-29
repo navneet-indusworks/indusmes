@@ -1,12 +1,12 @@
 #!/usr/bin/env python3
-
-from PySide6.QtCore import QThread, Signal
+import os
+os.environ["QT_LOGGING_RULES"] = "qt.accessibility.atspi*=false"
+import sys
+from PySide6.QtCore import QThread, Signal                                      
 import multiprocessing
 from PySide6 import QtWidgets
-import sys
 from indusmes.backend.sensor import Sensor
 from indusmes.home.home import home
-
 
 
 class DataReceiver(QThread):

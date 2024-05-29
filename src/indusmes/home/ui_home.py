@@ -19,7 +19,7 @@ from PySide6.QtWidgets import (QApplication, QFrame, QGroupBox, QHBoxLayout,
     QLabel, QLayout, QLineEdit, QMainWindow,
     QPushButton, QScrollArea, QSizePolicy, QSpacerItem,
     QStackedWidget, QTabWidget, QVBoxLayout, QWidget)
-from indusmes import icons_rc
+import icons_rc
 
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
@@ -332,7 +332,7 @@ class Ui_MainWindow(object):
         self.job_area.setAlignment(Qt.AlignLeading|Qt.AlignLeft|Qt.AlignTop)
         self.job_area_contents = QWidget()
         self.job_area_contents.setObjectName(u"job_area_contents")
-        self.job_area_contents.setGeometry(QRect(0, 0, 478, 522))
+        self.job_area_contents.setGeometry(QRect(0, 0, 478, 722))
         self.job_area_contents.setStyleSheet(u"")
         self.job_area.setWidget(self.job_area_contents)
 
@@ -507,6 +507,10 @@ class Ui_MainWindow(object):
 
         self.verticalLayout_6.addWidget(self.status_text)
 
+        self.verticalSpacer_3 = QSpacerItem(20, 40, QSizePolicy.Policy.Minimum, QSizePolicy.Policy.Expanding)
+
+        self.verticalLayout_6.addItem(self.verticalSpacer_3)
+
 
         self.horizontalLayout_2.addLayout(self.verticalLayout_6)
 
@@ -592,7 +596,7 @@ class Ui_MainWindow(object):
 
         self.retranslateUi(MainWindow)
 
-        self.main_section.setCurrentIndex(2)
+        self.main_section.setCurrentIndex(1)
         self.complete_job_btn.setDefault(False)
 
 

@@ -25,7 +25,6 @@ class Sensor:
         self.ct_sensitivity = float(self.config_data['ct_sensitivity'])
         self.idle_current_threshold = float(self.config_data['idle_current_threshold'])
         self.idle_time_threshold = float(self.config_data['idle_time_threshold'])
-        print(f"Idle Current Threshold: {self.idle_current_threshold}")
         self.downtime_counter = float(0.0)
         self.sensor = None
         if 'arm' in platform.machine().lower():
@@ -59,7 +58,7 @@ class Sensor:
             instantaneous_current = voltage * self.ct_sensitivity
             sum_squared_currents += instantaneous_current ** 2
         mean_squared_current = sum_squared_currents / num_samples
-        latest_current_value = math.sqrt(mean_squared_current)
+        latest_current_value = round(math.sqrt(mean_squared_current), 3)
         return latest_current_value
 
     def check_asset_working(self, latest_current_value):
