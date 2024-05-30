@@ -26,11 +26,15 @@ class Sensor:
         self.idle_current_threshold = float(self.config_data['idle_current_threshold'])
         self.idle_time_threshold = float(self.config_data['idle_time_threshold'])
         self.downtime_counter = float(0.0)
-        self.sensor = None
-        if 'arm' in platform.machine().lower():
+        self.platform = platform.machine()
+        print(f"Platform: {self.platform}")
+        if self.platform != 'x86_64':
             self.i2c = busio.I2C(board.SCL, board.SDA)
             self.ads = ADS.ADS1115(self.i2c)
             self.sensor = AnalogIn(self.ads, ADS.P0)
+            print('Sensor Initialized')
+        else:
+            self.sensor = None
 
     def update_downtime_reasons(self):
         url = f"{self.site}/api/v2/document/Downtime Reasons?fields=[\"name\", \"reason\"]"

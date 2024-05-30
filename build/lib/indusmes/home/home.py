@@ -219,6 +219,7 @@ class home(QtWidgets.QMainWindow):
     def fetch_latest_job_list(self):
             url = f"{self.site}/api/v2/document/Job Card?fields=[\"*\"]&filters=[[\"asset\", \"=\", \"{self.asset_id}\"],[\"job_status\", \"!=\", \"Cancelled\"],[\"job_status\", \"!=\", \"Completed\"]]&order_by=planned_start_date_time%20asc"
             response = self.session.get(url)
+            print(response.text)
             self.joblist = response.text
     
     def card_lambda(self, job_id):
@@ -338,14 +339,14 @@ class home(QtWidgets.QMainWindow):
         dialog.exec()
     
     def rejects_job_btn_fn(self, job_id):
-        url = f"{self.site}/api/v2/document/Reject Reasons"
+        url = f"{self.site}/api/v2/document/Reject Reasons?fields=[\"name\", \"reason\"]"
         response = self.session.get(url)
         options = json.loads(response.text)['data']
         dialog = rejects_dialog()
         dialog.current_reject_qty_text.setText(str(self.reject_quantity_text.text()))
-        dialog.submit_btn.clicked.connect(lambda: self.send_job_rejects(dialog, job_id))
+        dialog.submit_btn.clicked.connect(lambda: self.send_job_rejects(dialog, job_id, options))
         for option in options:
-            dialog.reason_dropdown.addItem(option['name'])
+            dialog.reason_dropdown.addItem(option['reason'])
         dialog.exec()
 
     def complete_job_btn_fn(self, job_id):
@@ -394,12 +395,14 @@ class home(QtWidgets.QMainWindow):
             else:
                 dialog.msg_text.setText("Server Busy Please Try Again Later")
     
-    def send_job_rejects(self, dialog, job_id):
+    def send_job_rejects(self, dialog, job_id, options):
         if dialog.add_reject_qty_text.value() == 0:
             dialog.msg_text.setText("Please Enter a Valid Quantity")
         else:
             dialog.msg_text.setText("")
-            url = f"{self.site}/api/v2/method/indusworks.api.update_rejects?name={job_id}&quantity={dialog.add_reject_qty_text.value()}&reject_reason={dialog.reason_dropdown.currentText()}"
+            reason = dialog.reason_dropdown.currentText()
+            name = next((item['name'] for item in options if item['reason'] == reason), None)
+            url = f"{self.site}/api/v2/method/indusworks.api.update_rejects?name={job_id}&quantity={dialog.add_reject_qty_text.value()}&reject_reason={name}"
             headers = {
                 'Content-Type': 'application/json'
             }

@@ -9,7 +9,7 @@ def read_requirements():
 
 setup(
     name= "indusmes",
-    version = "1.0.0",
+    version = "1.0.1",
     description= "MES Application from IndusWorks",
     author = "Navneet Jain",
     author_email="navneet@indusworks.in",
